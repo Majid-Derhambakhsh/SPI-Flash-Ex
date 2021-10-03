@@ -25,39 +25,39 @@ The SPI Flash Extension library to merges a collection of flash memories as a me
 ## Overview 
 ### Initialization and de-initialization functions:
 ```c++
-uint8_t SPI_FlashEx_Init(SPI_Flash_ListTypeDef *_flash_list);
+uint8_t SPI_FlashEx_Init(SPI_Flash_BankTypeDef *_flashBank);
 ``` 
 
 ### Operation functions:
 ```c++
 /* :::::::::::::::::::: Flash Erase :::::::::::::::::::: */
-uint8_t SPI_FlashEx_ChipErase(SPI_Flash_ListTypeDef *_flash_list);
+uint8_t SPI_FlashEx_ChipErase(SPI_Flash_BankTypeDef *_flashBank);
 
-uint8_t SPI_FlashEx_SectorErase(SPI_Flash_ListTypeDef *_flash_list, uint32_t _sector);
+uint8_t SPI_FlashEx_SectorErase(SPI_Flash_BankTypeDef *_flashBank, uint32_t _sector);
 
-uint8_t SPI_FlashEx_BlockErase(SPI_Flash_ListTypeDef *_flash_list, uint32_t _block);
+uint8_t SPI_FlashEx_BlockErase(SPI_Flash_BankTypeDef *_flashBank, uint32_t _block);
 
 /* :::::::::::::::::::: Flash Write :::::::::::::::::::: */
-uint8_t SPI_FlashEx_Write(SPI_Flash_ListTypeDef *_flash_list, uint8_t _data, uint32_t _address);
+uint8_t SPI_FlashEx_Write(SPI_Flash_BankTypeDef *_flashBank, uint8_t _data, uint32_t _address);
 
-uint8_t SPI_FlashEx_PageWrite(SPI_Flash_ListTypeDef *_flash_list, uint8_t *_pData, uint32_t _page, uint32_t _offset, uint32_t _size);
+uint8_t SPI_FlashEx_PageWrite(SPI_Flash_BankTypeDef *_flashBank, uint8_t *_pData, uint32_t _page, uint32_t _offset, uint32_t _size);
 
-uint8_t SPI_FlashEx_SectorWrite(SPI_Flash_ListTypeDef *_flash_list, uint8_t *_pData, uint32_t _sector, uint32_t _offset, uint32_t _size);
+uint8_t SPI_FlashEx_SectorWrite(SPI_Flash_BankTypeDef *_flashBank, uint8_t *_pData, uint32_t _sector, uint32_t _offset, uint32_t _size);
 
-uint8_t SPI_FlashEx_BlockWrite(SPI_Flash_ListTypeDef *_flash_list, uint8_t* _pData, uint32_t _block, uint32_t _offset, uint32_t _size);
+uint8_t SPI_FlashEx_BlockWrite(SPI_Flash_BankTypeDef *_flashBank, uint8_t* _pData, uint32_t _block, uint32_t _offset, uint32_t _size);
 
-uint8_t SPI_FlashEx_BurstWrite(SPI_Flash_ListTypeDef *_flash_list, uint8_t *_pData, uint32_t _address, uint32_t _size);
+uint8_t SPI_FlashEx_BurstWrite(SPI_Flash_BankTypeDef *_flashBank, uint8_t *_pData, uint32_t _address, uint32_t _size);
 
 /* :::::::::::::::::::: Flash Read ::::::::::::::::::::: */
-uint8_t SPI_FlashEx_Read(SPI_Flash_ListTypeDef *_flash_list, uint8_t *_data, uint32_t _address);
+uint8_t SPI_FlashEx_Read(SPI_Flash_BankTypeDef *_flashBank, uint8_t *_data, uint32_t _address);
 
-uint8_t SPI_FlashEx_PageRead(SPI_Flash_ListTypeDef *_flash_list, uint8_t *_pData, uint32_t _page, uint32_t _offset, uint32_t _size);
+uint8_t SPI_FlashEx_PageRead(SPI_Flash_BankTypeDef *_flashBank, uint8_t *_pData, uint32_t _page, uint32_t _offset, uint32_t _size);
 
-uint8_t SPI_FlashEx_SectorRead(SPI_Flash_ListTypeDef *_flash_list, uint8_t *_pData, uint32_t _sector, uint32_t _offset, uint32_t _size);
+uint8_t SPI_FlashEx_SectorRead(SPI_Flash_BankTypeDef *_flashBank, uint8_t *_pData, uint32_t _sector, uint32_t _offset, uint32_t _size);
 
-uint8_t SPI_FlashEx_BlockRead(SPI_Flash_ListTypeDef *_flash_list, uint8_t *_pData, uint32_t _block, uint32_t _offset, uint32_t _size);
+uint8_t SPI_FlashEx_BlockRead(SPI_Flash_BankTypeDef *_flashBank, uint8_t *_pData, uint32_t _block, uint32_t _offset, uint32_t _size);
 
-uint8_t SPI_FlashEx_BurstRead(SPI_Flash_ListTypeDef *_flash_list, uint8_t *_pData, uint32_t _address, uint32_t _size);
+uint8_t SPI_FlashEx_BurstRead(SPI_Flash_BankTypeDef *_flashBank, uint8_t *_pData, uint32_t _address, uint32_t _size);
 
 ``` 
 
@@ -93,20 +93,20 @@ None
   
   ``` 
   
-#### 5.  Create flash memory list object, set FlashList, NumberOfChip, and initialize it, for example:  
+#### 5.  Create flash memory bank object, set FlashList, NumberOfChip, and initialize it, for example:  
 * Initializer:
   ```c++
-  SPI_FlashEx_Init(SPI_Flash_ListTypeDef *_flash_list);
+  SPI_FlashEx_Init(SPI_Flash_BankTypeDef *_flashBank);
   ``` 
 * Parameters:  
-     * _flash_list: pointer to flash list struct
+     * _flashBank: pointer to flash bank struct
           
           
 * Example:
   ```c++  
   Code of step 4 ...
   
-  SPI_Flash_ListTypeDef   FlashBank;
+  SPI_Flash_BankTypeDef   FlashBank;
 
   FlashBank.FlashList    = MainFlashList;
   FlashBank.NumberOfChip = 3;
@@ -192,7 +192,7 @@ int main()
 	/* ~~~~~~~~~~~~~~~~ Flash Bank Example ~~~~~~~~~~~~~~ */
 	/* --------- Setup Flash ---------- */
 	SPI_Flash_TypeDef       MainFlashList[3];
-	SPI_Flash_ListTypeDef   FlashBank;
+	SPI_Flash_BankTypeDef   FlashBank;
   
 	MainFlashList[0].CS_GPIO_Port = 0;
 	MainFlashList[0].CS_GPIO_Pin  = (1 << 16);
