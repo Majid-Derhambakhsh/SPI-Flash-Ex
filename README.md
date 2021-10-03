@@ -20,7 +20,7 @@ The SPI Flash Extension library to merges a collection of flash memories as a me
 - #### Changes :  
 
 - #### Required Library/Driver :
-               - SPI Flash library as base library
+	- SPI Flash library as base library : [Download](https://github.com/Majid-Derhambakhsh/SPI-Flash)  
 
 ## Overview 
 ### Initialization and de-initialization functions:
